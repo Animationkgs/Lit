@@ -14,15 +14,18 @@
 		var div= sing2.div;
 		var pre= preset().pushTo(sing.b).setcn('concept');
 		var rec= {
-		   a: div('a').setid('1'),
-		   b: div('b').setid('2'),
-		   c: div('c').setid('3'),
+		   a: div(1), a2: div(2), 
+		   b: div(3), b2: div(4),
+		   c: div(5), c2: div(6),
 		   d: div(title).setid('4').setcn('title'),
-		   e: div(title).setid('5').setcn('content')
+		   d2: div(title).setid('5').setcn('content')
 		};
-rec.e.e.appendChild( div(content).e);
+		div(content).appendTo(rec.d2);
 		'a b c d'.split(' ').map( sing.b.appendx(rec) );
-		pair(rec.d,rec.e);
+		pair(rec.a,rec.a2);
+		pair(rec.b,rec.b2);
+		pair(rec.c,rec.d2);
+		pair(rec.d,rec.d2);
 
 	</script>
 	</body>
