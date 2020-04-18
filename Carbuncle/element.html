@@ -1,10 +1,16 @@
-
+﻿
 <html>
-	<head></head>
+	<head>
+
+
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	</head>
+
 	<body>
 	<script src= "element.js"> </script>
 	<script src= "style.js"> </script>
-	<script src= "a.js"> </script>
+	<script src= "carbuncle.js"> </script>
+	<script src= "speckled.js"> </script>
 
 
 	<script>
@@ -17,15 +23,17 @@
 		   a: div(1), a2: div(2), 
 		   b: div(3), b2: div(4),
 		   c: div(5), c2: div(6),
-		   d: div(title).setid('4').setcn('title'),
-		   d2: div(title).setid('5').setcn('content')
+		   d: div(carbuncle.title).setcn('title'), d2: div(carbuncle.title).setcn('content'),
+		   e: div(speckled.title).setcn('title'), e2: div(speckled.title).setcn('content')
 		};
-		div(content).appendTo(rec.d2);
-		'a b c d'.split(' ').map( sing.b.appendx(rec) );
+		div(carbuncle.content).appendTo(rec.d2);
+		div(speckled.content).appendTo(rec.e2);
+		'a b c d e'.split(' ').map( sing.b.appendx(rec) );
 		pair(rec.a,rec.a2);
 		pair(rec.b,rec.b2);
 		pair(rec.c,rec.c2);
 		pair(rec.d,rec.d2);
+		pair(rec.e,rec.e2);
 
 	</script>
 	</body>

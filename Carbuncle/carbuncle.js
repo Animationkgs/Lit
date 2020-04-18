@@ -1,10 +1,10 @@
 
+var carbuncle= (function () {
+	var i= {};
 
+	i.title="The Adventures of Sherlock Holmes / The Adventure of the Blue Carbuncle";
 
-
-var title="The Adventures of Sherlock Holmes / The Adventure of the Blue Carbuncle";
-
-var content= `<p>I had called upon my friend Sherlock Holmes upon the second morning after Christmas, with the intention of wishing him the compliments of the season. He was lounging upon the sofa in a purple dressing-gown, a pipe-rack within his reach upon the right, and a pile of crumpled morning papers, evidently newly studied, near at hand. Beside the couch was a wooden chair, and on the angle of the back hung a very seedy and disreputable hard-felt hat, much the worse for wear, and cracked in several places. A lens and a forceps lying upon the seat of the chair suggested that the hat had been suspended in this manner for the purpose of examination. 
+	i.content= `<p>I had called upon my friend Sherlock Holmes upon the second morning after Christmas, with the intention of wishing him the compliments of the season. He was lounging upon the sofa in a purple dressing-gown, a pipe-rack within his reach upon the right, and a pile of crumpled morning papers, evidently newly studied, near at hand. Beside the couch was a wooden chair, and on the angle of the back hung a very seedy and disreputable hard-felt hat, much the worse for wear, and cracked in several places. A lens and a forceps lying upon the seat of the chair suggested that the hat had been suspended in this manner for the purpose of examination. 
 </p>
 <div class="center"><div class="floatnone"><a href="https://en.m.wikisource.org/wiki/File:SH_BLUE-01.png" class="image" title="Sindey Paget, 1892"><img alt="Sindey Paget, 1892" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/SH_BLUE-01.png" decoding="async" width="340" height="292" data-file-width="340" data-file-height="292"></a></div></div>
 <p>"You are engaged," said I; "perhaps I interrupt you." 
@@ -238,4 +238,5 @@ var content= `<p>I had called upon my friend Sherlock Holmes upon the second mor
 </p><p>"After all, Watson," said Holmes, reaching up his hand for his clay pipe, "I am not retained by the police to supply their deficiencies. If Horner were in danger it would be another thing; but this fellow will not appear against him, and the case must collapse. I suppose that I am commuting a felony, but it is just possible that I am saving a soul. This fellow will not go wrong again; he is too terribly frightened. Send him to jail now, and you make him a jail-bird for life. Besides, it is the season of forgiveness. Chance has put in our way a most singular and whimsical problem, and its solution is its own reward. If you will have the goodness to touch the bell, Doctor, we will begin another investigation, in which, also a bird will be the chief feature."
 </p>`;
 
-
+	return i;
+}) ();

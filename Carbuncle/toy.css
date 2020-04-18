@@ -1,0 +1,49 @@
+
+
+
+
+body {
+  font-family:sans-serif;
+}
+.parade {
+  min-height:5.5em;
+}
+#deck {
+  display:flex;
+  flex-direction:column;
+}
+.parade, .deck-row {
+  display:flex;
+}
+.card, .placeholder {
+  color:white;
+  font-weight:bold;
+  height:4.5em;
+  line-height:4.5em;
+  margin:2px;
+  padding:3px;
+  text-align:center;
+  width:3em;
+}
+.rank {
+  font-size:1.5em;
+  padding-right:2px;
+}
+#deck .card {
+  cursor:pointer;
+}
+.willEliminate {
+  opacity:0.3;
+}
+#help {
+  background:white;
+  border:5em solid rgba(0, 0, 0, 0.3);
+  box-sizing:border-box;
+  height:100%;
+  left:0;
+  overflow:auto;
+  padding:2em;
+  position:fixed;
+  top:0;
+  width:100%;
+}
