@@ -1,0 +1,61 @@
+﻿
+<html>
+	<head></head>
+
+	<body>
+	<script src= "element.js"> </script>
+	<script src= "style.js"> </script>
+	<script src= "compress.js"> </script>
+
+	<script>
+
+var zipme= function (a,b) { return a.map( function(e, i) { return [e, b[i]]; } ); };
+		sing2.style(style).appendTo(sing.h);
+		var div= sing2.div;
+
+		var pre= preset().pushTo(sing.b).setcn('compress');
+
+var f2= function (x,n) { return x.split('\n'); };
+var sm= function (x,n) { return {
+	a: x[0],
+	b: x[1],
+	repr: function () {
+		var d1= div(this.a).appendTo(sing.b).setcn('sentence');
+
+		if (this.a==this.b) {
+			d1.setcn('incomplete');
+		}
+		else {
+			var d2= div(this.b).setcn('meaning');
+			pair(d1,d2);
+		}
+	}
+}; };
+var pm= function (x,n) {
+	var sx= x.split('\n\n').map(f2);
+	var smx= zipme(sx[0],sx[1]).map(sm)
+	return {
+		smx: smx,
+		repr: function () { this.smx.map( function (x2,n2) { x2.repr(); } ); }
+	};
+};
+var f3= function (x,n) { x.map(put); return null; };
+var f0= function (x,n) { return x.split('\n\n\n').map(pm); };
+var put= function (x,n) { pre.publish(div(x)); };
+var a= [s1,s2,s3,s4,s5,s6,s7].map( f0 );
+
+var v= a.map ( function (x,n) {
+	x.map( function (x2,n2) { x2.repr(); div('next').appendTo(sing.b); } );
+});
+
+		var rec= {
+		   a: div(s1), b: div(s2), 
+		   c: div(s3), d: div(s4),
+		   e: div(s5), f: div(s6),
+		   g: div(s7)
+		};
+		//'a b c d e f g'.split(' ').map( sing.b.appendx(rec) );
+
+	</script>
+	</body>
+</html>

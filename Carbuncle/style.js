@@ -21,6 +21,10 @@ background-color: gainsboro;
 text-align: center;
 border: 2px silver;
 }
+
+.sentence { background-color: lavender; }
+.meaning { background-color: plum; }
+.incomplete { background-color: thistle; }
 `;
 
 
