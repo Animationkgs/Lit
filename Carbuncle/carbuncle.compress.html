@@ -5,18 +5,17 @@
 	<body>
 	<script src= "element.js"> </script>
 	<script src= "style.js"> </script>
-	<script src= "compress.js"> </script>
+	<script src= "carbuncle.js"> </script>
+	<script src= "carbuncle.compress.js"> </script>
 
 	<script>
-
 var zipme= function (a,b) { return a.map( function(e, i) { return [e, b[i]]; } ); };
 		sing2.style(style).appendTo(sing.h);
 		var div= sing2.div;
 
 		var pre= preset().pushTo(sing.b).setcn('compress');
 
-var f2= function (x,n) { return x.split('\n'); };
-var sm= function (x,n) { return {
+var sentence= function (x,n) { return {
 	a: x[0],
 	b: x[1],
 	repr: function () {
@@ -31,21 +30,38 @@ var sm= function (x,n) { return {
 		}
 	}
 }; };
-var pm= function (x,n) {
+var paragraph= function (x,n) {
+	//alert(x);
+	if (x.slice(0,4)=="<div") {
+		//alert(2);
+	   return {
+		   repr: function () { div( x ).appendTo(sing.b).setcn('illustrate'); }
+	   };
+	}
+	var f2= function (x,n) { return x.split('\n'); };
 	var sx= x.split('\n\n').map(f2);
-	var smx= zipme(sx[0],sx[1]).map(sm)
+	var smx= zipme(sx[0],sx[1]).map(sentence);
 	return {
 		smx: smx,
 		repr: function () { this.smx.map( function (x2,n2) { x2.repr(); } ); }
 	};
 };
-var f3= function (x,n) { x.map(put); return null; };
-var f0= function (x,n) { return x.split('\n\n\n').map(pm); };
+
+var paragraphs= function (x,n) {
+	//alert(x);
+	return x.split('\n\n\n').map(paragraph);
+};
+div( carbuncle.title ).appendTo(sing.b).setcn('title');
+div('next').appendTo(sing.b).setcn('next');
+
 var put= function (x,n) { pre.publish(div(x)); };
-var a= [s1,s2,s3,s4,s5,s6,s7].map( f0 );
+var a= [s1,s2,s3,s4,s5,s6,s7,s8,s9,s10].map( paragraphs );
+//alert(1);
+//var a= [s1].map( paragraphs );
 
 var v= a.map ( function (x,n) {
-	x.map( function (x2,n2) { x2.repr(); div('next').appendTo(sing.b); } );
+	//alert(x);
+	x.map( function (x2,n2) { x2.repr(); div('next').appendTo(sing.b).setcn('next'); } );
 });
 
 		var rec= {
