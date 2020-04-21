@@ -1,6 +1,5 @@
 
-
-
+var dbg= false;
 var wrap= function (e) {
    var i;
 
@@ -12,7 +11,13 @@ var wrap= function (e) {
    i.setsrc= function (x) { i.e.src= x; return i; };
    i.settype= function (x) { i.e.type= x; return i; };
    i.setvalue= function (x) { i.e.value= x; return i; };
-   i.sethtml= function (x) { if (x) i.e.innerHTML= x; return i; };
+   i.sethtml= function (x) {
+	   if (x)
+		   if (dbg) i.e.innerHTML= `${i.eT}=${x}`;
+	   else i.e.innerHTML= x;
+	   return i;
+   };
+
    i.setonclick= function (f) { i.e.onclick= f; return i; };
    i.getsrc= function (x) { return i.e.src; };
 
@@ -26,7 +31,7 @@ var wrap= function (e) {
 
 var sing= {
    find: function (id) { var e= document.getElementById(id); return wrap(e); },
-   create: function (eT) { var e= document.createElement(eT); return wrap(e); },
+   create: function (eT) { var e= document.createElement(eT); var w= wrap(e); w.eT= eT; return w; },
    b: wrap(document.body),
    h: wrap(document.head)
 };
