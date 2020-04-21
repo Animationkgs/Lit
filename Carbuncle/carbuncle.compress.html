@@ -21,12 +21,9 @@ var sentence= function (x,n) { return {
 	a: x[0],
 	b: x[1],
 	repr: function (par) {
-		mark('s').appendTo(par).setcn('space');
 		var d1= mark(this.a).appendTo(par).setcn('sentence');
 
-		if (this.a==this.b) {
-			d1.setcn('incomplete');
-		}
+		if (this.a==this.b) d1.setcn('incomplete');
 		else {
 			var d2= mark(this.b).setcn('meaning');
 			pair(d1,d2);
@@ -37,20 +34,21 @@ var sentence= function (x,n) { return {
 var paragraph= function (x,n) {
 	//alert(x);
 	var par= div().appendTo(sing.b).setcn('par');
-	div('next').appendTo(par).setcn('next');
-	if (x.slice(0,4)=="<div") {
-		//alert(2);
+	//div('next').appendTo(par).setcn('next');
+	var v= x.slice(0,3);
+	if (v=="<im" || v=="<H3") {
 	   return {
 		   repr: function () {
-			   div( x ).appendTo(par).setcn('illustrate');
+		var g= function (x2,n2) { div(x2).appendTo(par).setcn('image'); };
+		x.split('\n').map(g);
 		   }
 	   };
 	}
 	var f2= function (x,n) { return x.split('\n'); };
 	var sx= x.split('\n\n').map(f2);
 	var smx= zipme(sx[0],sx[1]).map(sentence);
-	var parp= p('').appendTo(par);
-	mark('s').appendTo(parp).setcn('space');
+	var parp= p().appendTo(par);
+	mark('&emsp;').appendTo(parp).setcn('space');
 	return {
 		smx: smx,
 		repr: function () { smx.map( function (x2,n2) { x2.repr(parp); } ); }
@@ -61,12 +59,12 @@ var paragraphs= function (x,n) {
 	//alert(x);
 	return x.split('\n\n\n').map(paragraph);
 };
-div( carbuncle.title ).appendTo(sing.b).setcn('title');
+div(carbuncle.title ).appendTo(sing.b).setcn('title');
 
 var put= function (x,n) { pre.publish(div(x)); };
 var a= [s1,s2,s3,s4,s5,s6,s7,s8,s9,s10].map( paragraphs );
 //alert(1);
-//var a= [s1,s2].map( paragraphs );
+//var a= [s1].map( paragraphs );
 
 var v= a.map ( function (x,n) {
 	//alert(x);
@@ -75,15 +73,6 @@ var v= a.map ( function (x,n) {
 		//div('next').appendTo(sing.b).setcn('next');
 	} );
 });
-
-		var rec= {
-		   a: div(s1), b: div(s2), 
-		   c: div(s3), d: div(s4),
-		   e: div(s5), f: div(s6),
-		   g: div(s7)
-		};
-		//'a b c d e f g'.split(' ').map( sing.b.appendx(rec) );
-
 	</script>
 	</body>
 </html>

@@ -13,7 +13,9 @@ Hat.
 Examination.
 
 
-<div class="center"><img alt="Sindey Paget, 1892" src="carbuncle1.png" decoding="async" width="340" height="292" data-file-width="340" data-file-height="292"></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sindey Paget, 1892" src="carbuncle1.jpg" decoding="async" width=500>
+"A very seedy hard felt hat."
 
 
 "You are engaged," said I; "perhaps I interrupt you."
@@ -106,8 +108,15 @@ Goose-abandoned.
 Spoils."
 
 
-<div class="center">
-	<img alt="Sidney Paget, 1892" src="carbuncle2.png" decoding="async" width="335" height="297" data-file-width="335" data-file-height="297"></div>`;
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle2.png" decoding="async" width="500">
+"THE ROUGHS HAD FLED AT THE APPEARANCE OF PETERSON."
+
+
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f1.jpg" decoding="async" width=500>
+"He was left in possession of the field of battle."`;
+
 
 var s3= `"Which surely he restored to their owner?"
 
@@ -396,17 +405,23 @@ Has it returned to life and flapped off through the kitchen window?"
 Holmes twisted himself round upon the sofa to get a fairer view of the man's excited face.
 
 
-<div class="center"><div class="floatnone">
-<img alt="Sidney Paget, 1892" src="carbuncle3.png" decoding="async" width="350" height="269" data-file-width="350" data-file-height="269"></div></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle3.png" decoding="async" width="500">
+"SEE WHAT MY WIFE FOUND IN ITS CROP!"
 
 
 "See here, sir!
 See what my wife found in its crop!"
 He held out his hand and displayed upon the centre of the palm a brilliantly scintillating blue stone, rather smaller than a bean in size, but of such purity and radiance that it twinkled like an electric point in the dark hollow of his hand.
 
-"See here, sir!
-See what my wife found in its crop!"
-He held out his hand and displayed upon the centre of the palm a brilliantly scintillating blue stone, rather smaller than a bean in size, but of such purity and radiance that it twinkled like an electric point in the dark hollow of his hand.
+"Sir!
+Crop!"
+Blue-Diamond.
+
+
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f2.jpg" decoding="async" width=500>
+"See here, Sir! See what my wife found in its crop!"
 
 
 Sherlock Holmes sat up with a whistle.
@@ -675,13 +690,23 @@ There is a woodcock, I believe.
 By the way, in view of recent occurrences, perhaps I ought to ask Mrs. Hudson to examine its crop."
 
 
-I had been delayed at a case, and it was a little after half-past six when I found myself in Baker Street once more.
-As I approached the house I saw a tall man in a Scotch bonnet with a coat which was buttoned up to his chin waiting outside in the bright semicircle which was thrown from the fanlight.
-Just as I arrived the door was opened, and we were shown up together to Holmes's room.
+<H3>"Illustrations by F. C. Swayze in The Philadelphia Inquirer (10 January 1892)"</H3>
+<img alt="" src="fc1.jpg" decoding="async" width=500>
+"I saw a tall man in a scotch bonnet, with a coat which was buttoned up to the chin."
+
 
 I had been delayed at a case, and it was a little after half-past six when I found myself in Baker Street once more.
 As I approached the house I saw a tall man in a Scotch bonnet with a coat which was buttoned up to his chin waiting outside in the bright semicircle which was thrown from the fanlight.
 Just as I arrived the door was opened, and we were shown up together to Holmes's room.
+
+Delayed.
+As I approached the house I saw a tall man in a Scotch bonnet with a coat which was buttoned up to his chin waiting outside in the bright semicircle which was thrown from the fanlight.
+Just as I arrived the door was opened, and we were shown up together to Holmes's room.
+
+
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f3.jpg" decoding="async" width=500>
+"'Mr. Henry Baker, I believe,' said he."
 
 
 "Mr. Henry Baker, I believe," said he, rising from his armchair and greeting his visitor with the easy air of geniality which he could so readily assume.
@@ -690,7 +715,7 @@ It is a cold night, and I observe that your circulation is more adapted for summ
 Ah, Watson, you have just come at the right time.
 Is that your hat, Mr. Baker?"
 
-"Mr. Henry Baker, I believe," said he, rising from his armchair and greeting his visitor with the easy air of geniality which he could so readily assume.
+"Air-of-Geniality."
 "Pray take this chair by the fire, Mr. Baker.
 It is a cold night, and I observe that your circulation is more adapted for summer than for winter.
 Ah, Watson, you have just come at the right time.
@@ -800,8 +825,9 @@ I am much indebted to you, sir, for a Scotch bonnet is fitted neither to my year
 With a comical pomposity of manner he bowed solemnly to both of us and strode off upon his way.
 
 
-<div class="center"><div class="floatnone">
-<img alt="Sidney Paget, 1892" src="carbuncle4.png" decoding="async" width="290" height="336" data-file-width="290" data-file-height="336"></div></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle4.png" decoding="async" width="500">
+"HE BOWED SOLEMNLY TO BOTH OF US."
 
 
 "So much for Mr. Henry Baker," said Holmes when he had closed the door behind him.
@@ -932,6 +958,11 @@ It's a cold night," said Holmes.
 It's a cold night," said Holmes.
 
 
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f4.jpg" decoding="async" width=500>
+"The salesman nodded, and shot a questioning glance at my companion."
+
+
 The salesman nodded and shot a questioning glance at my companion.
 
 The salesman nodded and shot a questioning glance at my companion.
@@ -1126,8 +1157,9 @@ Now, look at that third name.
 Just read it out to me."
 
 
-<div class="center"><div class="floatnone">
-<img alt="Sidney Paget, 1892" src="carbuncle5.png" decoding="async" width="350" height="285" data-file-width="350" data-file-height="285"></div></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle5.png" decoding="async" width="500">
+"JUST READ IT OUT TO ME."
 
 
 "Mrs. Oakshott, 117, Brixton Road -- 249," read Holmes.
@@ -1303,8 +1335,9 @@ You are endeavouring to trace some geese which were sold by Mrs. Oakshott, of Br
 You are endeavouring to trace some geese which were sold by Mrs. Oakshott, of Brixton Road, to a salesman named Breckinridge, by him in turn to Mr. Windigate, of the Alpha, and by him to his club, of which Mr. Henry Baker is a member."
 
 
-<div class="center"><div class="floatnone">
-<img alt="Sidney Paget, 1892" src="carbuncle6.png" decoding="async" width="280" height="350" data-file-width="280" data-file-height="350"></div></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle6.png" decoding="async" width="500">
+"YOU ARE THE VERY MAN."
 
 
 "Oh, sir, you are the very man whom I have longed to meet," cried the little fellow with outstretched hands and quivering fingers.
@@ -1312,6 +1345,11 @@ You are endeavouring to trace some geese which were sold by Mrs. Oakshott, of Br
 
 "Oh, sir, you are the very man whom I have longed to meet," cried the little fellow with outstretched hands and quivering fingers.
 "I can hardly explain to you how interested I am in this matter."
+
+
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f5.jpg" decoding="async" width=500>
+"'Oh, Sir, you are the very man whom I have longed to meet,' cried the little fellow."
 
 
 Sherlock Holmes hailed a four-wheeler which was passing.
@@ -1430,6 +1468,11 @@ Holmes unlocked his strongbox and held up the blue carbuncle, which shone out li
 Ryder stood glaring with a drawn face, uncertain whether to claim or to disown it.
 
 
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f6.jpg" decoding="async" width=500>
+"What a shrimp it is, to be sure!"
+
+
 "The game's up, Ryder," said Holmes quietly.
 "Hold up, man, or you'll be into the fire!
 Give him an arm back into his chair, Watson.
@@ -1487,8 +1530,9 @@ Then, when he had left, you rifled the jewel case, raised the alarm, and had thi
 You then --" 
 
 
-<div class="center"><div class="floatnone">
-<img alt="Sidney Paget, 1892" src="carbuncle7.png" decoding="async" width="285" height="342" data-file-width="285" data-file-height="342"></div></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle7.png" decoding="async" width="500">
+"'HAVE MERCY!' HE SHRIEKED."
 
 
 Ryder threw himself down suddenly upon the rug and clutched at my companion's knees.
@@ -1516,6 +1560,11 @@ I swear it.
 I'll swear it on a Bible.
 Oh, don't bring it into court!
 For Christ's sake, don't!"
+
+
+<H3>"Illustrations by F. C. Swayze in The Philadelphia Inquirer (10 January 1892)"</H3>
+<img alt="" src="fc2.jpg" decoding="async" width=500>
+"Ryder threw himself down suddenly and clutched at my companion's knees."
 
 
 "Get back into your chair!"
@@ -1706,6 +1755,11 @@ There was not a bird to be seen there.
 " 'Yes, Jem; there were two barred-tailed ones, and I could never tell them apart.'
 
 
+<H3>"Illustrations by Josef Friedrich (1906)"</H3>
+<img alt="" src="f7.jpg" decoding="async" width=500>
+"He burst into convulsive sobbing, with his face buried in his hands."
+
+
 "Well, then, of course I saw it all, and I ran off as hard as my feet would carry me to this man Breckinridge; but he had sold the lot at once, and not one word would he tell me as to where they had gone.
 You heard him yourselves to-night.
 Well, he has always answered me like that.
@@ -1727,8 +1781,9 @@ Help-me!"
 Sobbing.
 
 
-<div class="center"><div class="floatnone">
-<img alt="Sidney Paget, 1892" src="carbuncle8.png" decoding="async" width="350" height="247" data-file-width="350" data-file-height="247"></a></div></div>
+<H3>"Illustrations by Sidney Paget in The Strand Magazine (January 1892)"</H3>
+<img alt="Sidney Paget, 1892" src="carbuncle8.png" decoding="async" width="500">
+"HE BURST INTO CONVULSIVE SOBBING."
 
 
 There was a long silence, broken only by his heavy breathing and by the measured tapping of Sherlock Holmes's finger-tips upon the edge of the table.
