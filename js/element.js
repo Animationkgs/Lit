@@ -34,6 +34,8 @@ var sing= {
 
 var sing2= {
    div: function (x) { return sing.create('div').sethtml(x); },
+   p: function (x) { return sing.create('p').sethtml(x); },
+   mark: function (x) { return sing.create('mark').sethtml(x); },
    input: function (x) { 
 	   return sing.create('input').settype( "text" ).setvalue(x);
    },

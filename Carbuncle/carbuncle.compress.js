@@ -13,7 +13,7 @@ Hat.
 Examination.
 
 
-<div class="center"><div class="floatnone"><img alt="Sindey Paget, 1892" src="carbuncle1.png" decoding="async" width="340" height="292" data-file-width="340" data-file-height="292"></div></div>
+<div class="center"><img alt="Sindey Paget, 1892" src="carbuncle1.png" decoding="async" width="340" height="292" data-file-width="340" data-file-height="292"></div>
 
 
 "You are engaged," said I; "perhaps I interrupt you."
@@ -106,9 +106,8 @@ Goose-abandoned.
 Spoils."
 
 
-<div class="center"><div class="floatnone">
-	<img alt="Sidney Paget, 1892" src="carbuncle2.png" decoding="async" width="335" height="297" data-file-width="335" data-file-height="297"></div></div>`;
-
+<div class="center">
+	<img alt="Sidney Paget, 1892" src="carbuncle2.png" decoding="async" width="335" height="297" data-file-width="335" data-file-height="297"></div>`;
 
 var s3= `"Which surely he restored to their owner?"
 
@@ -169,8 +168,7 @@ Hat."
 "But you are joking.
 What can you gather from this old battered felt?"
 
-"Joke?.
-
+"Joke?
 How?"
 
 
@@ -255,7 +253,7 @@ Also, by the way, that it is extremely improbable that he has gas laid on in his
 Is it possible that even now, when I give you these results, you are unable to see how they are attained?"
 
 "No.
-Is it possible that even now, when I give you these results, you are unable to see how they are attained?"`;
+Still-Confused?"`;
 
 
 var s5= `"I have no doubt that I am very stupid, but I must confess that I am unable to follow you.
@@ -285,7 +283,7 @@ It is a hat of the very best quality.
 Look at the band of ribbed silk and the excellent lining.
 If this man could afford to buy so expensive a hat three years ago, and has had no hat since, then he has assuredly gone down in the world."
 
-"This hat is three years old.
+"Old-Hat.
 These flat brims curled at the edge came in then.
 It is a hat of the very best quality.
 Look at the band of ribbed silk and the excellent lining.
@@ -1718,15 +1716,15 @@ God help me!
 God help me!"
 He burst into convulsive sobbing, with his face buried in his hands.
 
-"Well, then, of course I saw it all, and I ran off as hard as my feet would carry me to this man Breckinridge; but he had sold the lot at once, and not one word would he tell me as to where they had gone.
-You heard him yourselves to-night.
-Well, he has always answered me like that.
-My sister thinks that I am going mad.
-Sometimes I think that I am myself.
-And now -- and now I am myself a branded thief, without ever having touched the wealth for which I sold my character.
-God help me!
-God help me!"
-He burst into convulsive sobbing, with his face buried in his hands.
+"Sold-to-Unknown.
+Heard-him.
+Never-Tells-me.
+Sister-thinks-me-mad.
+I-Agree.
+Branded-Thief-for-Nought-Sold-Character.
+God!
+Help-me!"
+Sobbing.
 
 
 <div class="center"><div class="floatnone">
@@ -1736,34 +1734,34 @@ He burst into convulsive sobbing, with his face buried in his hands.
 There was a long silence, broken only by his heavy breathing and by the measured tapping of Sherlock Holmes's finger-tips upon the edge of the table.
 Then my friend rose and threw open the door.
 
-There was a long silence, broken only by his heavy breathing and by the measured tapping of Sherlock Holmes's finger-tips upon the edge of the table.
-Then my friend rose and threw open the door.
+Silent-Breathing-Tapping.
+Door.
 
 
 "Get out!" said he.
 
-"Get out!" said he.
+"Out!" Holmes.
 
 
 "What, sir!
 Oh, Heaven bless you!"
 
-"What, sir!
-Oh, Heaven bless you!"
+"Sir!
+Bless-you!"
 
 
 "No more words.
 Get out!"
 
-"No more words.
-Get out!"
+"Shut-up.
+Out!"
 
 
 And no more words were needed.
 There was a rush, a clatter upon the stairs, the bang of a door, and the crisp rattle of running footfalls from the street.
 
-No-words.
-Running-Footfalls.
+Shut-His-Mouth.
+Rush-Clatter-Bang-Rattle-Running.
 
 
 "After all, Watson," said Holmes, reaching up his hand for his clay pipe, "I am not retained by the police to supply their deficiencies.
