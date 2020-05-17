@@ -1,0 +1,7 @@
+
+
+$ ~/y2 --skip-download --all-subs --write-sub --write-auto-sub -i -j --write-description --write-info-json --write-annotations -g -e --get-id --get-thumbnail --get-description --get-duration --get-filename --get-format  https://www.youtube.com/playlist?list=PLM1QTgnEmd1tWzjpbKHO0EfZrILXbJzjy > out
+
+:%s/\(\d*\):"description": /var desc\1=
+grep -P -o "var desc\d*?= " description90s.js > out
+
