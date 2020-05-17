@@ -35,7 +35,7 @@ var fill2= function(d,n,v,depth=0) {
 	if (isobj(v)) {}
 	else {
 		node.setborderleft('solid');
-		mark(n+'='+v).setcn('small').appendTo(node).setborder('none').setbackgroundcolor('orange');
+		mark(n+'='+v).setcn('small').appendTo(node).setborder('none');
 		return null;
 	}
 	var head= div().appendTo(node).setborder('none').setcn('inline');
