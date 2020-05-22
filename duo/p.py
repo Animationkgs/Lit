@@ -95,7 +95,7 @@ e['ktc']= ktc.html()
 e['polish']= polish.html()
 
 s= json.dumps(e)
-s= ['var xxx= ', s, ';']
+s= ['var duo= ', s, ';']
 s= ''.join(s)
 b= 'json.js'
 b= open(b,'w')
