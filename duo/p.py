@@ -2,6 +2,9 @@
 
 import os, json, html
 
+def escape16(x):
+    return '&amp;&num;x{};'.format(x)
+
 class Alphabet:
 
     def __init__(self, x, sound= None):
@@ -11,8 +14,8 @@ class Alphabet:
         self.sound= sound
 
     def key(self):
-        ret= '&amp;&num;{};=&amp;&num;x{};'
-        return ret.format( self.i, self.h )
+        ret= '&amp;&num;{};={}'
+        return ret.format( self.i, escape16(self.h) )
 
     def html(self): return '<span style="font-size: 100px; background-color: linen">&#x{};</span>'.format( self.h )
 
@@ -311,6 +314,24 @@ a= SindhiImplosives2= '''097E DEVANAGARI LETTER DDDA
 097F DEVANAGARI LETTER BBA'''.split('\n')
 dvngr[24]= ShowRange(r6[n1:], a, 'Sindhi Implosives').html()
 n1+= len(a)
+dvngr['repr']= '{} count {}'.format('devanagari', str(n1))
+
+w={}
+a= '0905 0948 0938 093e'
+a= a.split(' ')
+key= ''.join([ escape16(x) for x in a ])
+a= [ '&#x{};'.format(x) for x in a ]
+a= ''.join(a)
+w[key]= a
+
+a= '092e 0948 0902'
+a= a.split(' ')
+key= ''.join([ escape16(x) for x in a ])
+a= [ '&#x{};'.format(x) for x in a ]
+a= ''.join(a)
+w[key]= a
+
+dvngr['word'] = w
 
 
 #print (hindi.unescape())
