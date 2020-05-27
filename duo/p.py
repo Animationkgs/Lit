@@ -2,29 +2,79 @@
 
 import os, json, html
 
+alphabets= {}
+
+
+def entity16(x):
+    return '&#x{};'.format(x)
+
+def entity16ord(x):
+    h= hex(x).split('x')[1].zfill(4)
+    return '&#x{};'.format(h)
+
 def escape16(x):
     return '&amp;&num;x{};'.format(x)
 
+
+def entity10(x):
+    return '&#{};'.format(x)
+
+def escape10(x):
+    return '&amp;&num;{};'.format(x)
+
+
+def span(x,style):
+    return '<span style="{}">{}</span>'.format(style,x)
+
+
 class Alphabet:
 
-    def __init__(self, x, sound= None):
-        self.x= x
-        self.i= int(x,16)
-        self.h= hex(self.i).split('x')[1].zfill(4)
-        self.sound= sound
+    def __init__(self, i, meaning= None):
+        self.i= i
+        self.h= hex(i).split('x')[1].zfill(4)
+        alphabets[self.h]= self
+        self.meaning= meaning
+        self.sound= None
+        if meaning:
+            self.sound= meaning.split(' ')[-1]
+        else:
+            print (i,meaning,self.show())
 
-    def key(self):
-        ret= '&amp;&num;{};={}'
-        return ret.format( self.i, escape16(self.h) )
+    def entity16(self): return entity16(self.h)
+    def escape16(self): return escape16(self.h)
+    def entity10(self): return entity10(self.i)
+    def key(self): return '{}={}'.format( self.entity10(), self.entity16() )
 
-    def html(self): return '<span style="font-size: 100px; background-color: linen">&#x{};</span>'.format( self.h )
+    def html(self):
+        style= "font-size: 100px; background-color: linen"
+        return span( self.entity16(), style )
 
     def show(self):
-        return '<span style="font-size: small; font-family: serif">{}{}</span>'.format(self.html(), str(self.sound))
+        style= "font-size: small; font-family: serif"
+        x= '{}{}'.format( self.html(), self.meaning )
+        return span(x,style)
 
-    def unescape(self): return html.unescape( self.html() )
+    def unescape(self): return html.unescape( self.entity16() )
 
-    def json(self): return { self.key(): self.show() }
+
+alphabets['0028']= '('
+alphabets['002c']= ','
+
+class Word:
+
+    def __init__(self, a, meaning):
+        a= a.split(' ')
+        self.a= [ alphabets[x] for x in a ]
+        self.meaning= meaning
+
+    def entity16(self): return ''.join([ x.entity16() for x in self.a ])
+    def escape16(self): return ''.join([ x.escape16() for x in self.a ])
+    def sound(self): return ', '.join([ x.sound for x in self.a ])
+
+    def show(self):
+        style= "font-size: 100px; background-color: linen"
+        x= "{} sound=[{}] meaning {}".format( self.entity16(), self.sound(), self.meaning )
+        return span(x, style)
 
 
 class ShowRange:
@@ -35,11 +85,8 @@ class ShowRange:
         else:
             a= [None for x in r]
         self.r= r
-        self.a= { i: Alphabet(hex(i),v) for i,v in zip(r,a) }
+        self.a= { i: Alphabet(i,v) for i,v in zip(r,a) }
         self.meaning= ' '.join([str(x) for x in [meaning, 'count=', len(a)]])
-
-    def unescape(self):
-        return [ k.unescape() for k,v in self.a.items() ]
 
     def html(self):
         d= { v.key(): v.show() for k,v in self.a.items() }
@@ -77,14 +124,10 @@ r= [ x for (x,y) in r5 ]
 a= [ y for (x,y) in r5 ] 
 polish= ShowRange(r,a,'polish')
 
-r6= range(0x0900, 0x0980)
-dvngr= ShowRange(r6)
-
-
 '''ą ć ę ł ń ó ś ź ż &#261; &#263; &#281; &#322; &#324; &#243; &#347; &#378; &#380; &#x0105; &#x0107; &#x0119; &#x0142; &#x0144; &#x00F3; &#x015B; &#x017A; &#x017C;
 '''
 
-
+r6= range(0x0900,0x0980)
 dvngr= { 'repr': 'devanagari' }
 n1= 0
 a= VariousSigns= '''0900 DEVANAGARI SIGN INVERTED CANDRABINDU = vaidika adhomukha candrabindu
@@ -170,7 +213,7 @@ n1+= len(a)
 
 
 a= DependentVowelSigns2= '''093E DEVANAGARI VOWEL SIGN AA
-093F DEVANAGARI VOWEL SIGN I • stands to the left of the consonant
+Stands to the left of the consonant<br> 093F DEVANAGARI VOWEL SIGN I
 0940 DEVANAGARI VOWEL SIGN II
 0941 DEVANAGARI VOWEL SIGN U
 0942 DEVANAGARI VOWEL SIGN UU
@@ -188,7 +231,7 @@ dvngr[5]= ShowRange(r6[n1:], a, 'Dependent Vowel Signs').html()
 n1+= len(a)
 
 
-a= Virama= '''094D DEVANAGARI SIGN VIRAMA = halant (the preferred Hindi name) • suppresses inherent vowel'''.split('\n')
+a= Virama= '''094D DEVANAGARI SIGN suppresses inherent vowel = halant (the preferred Hindi name) VIRAMA'''.split('\n')
 dvngr[6]= ShowRange(r6[n1:], a, 'Virama').html()
 n1+= len(a)
 
@@ -317,19 +360,482 @@ n1+= len(a)
 dvngr['repr']= '{} count {}'.format('devanagari', str(n1))
 
 w={}
-a= '0905 0948 0938 093e'
-a= a.split(' ')
-key= ''.join([ escape16(x) for x in a ])
-a= [ '&#x{};'.format(x) for x in a ]
-a= ''.join(a)
-w[key]= a
+def push(a, meaning):
+    a= Word(a, meaning)
+    w[a.escape16()]= a.show()
 
-a= '092e 0948 0902'
-a= a.split(' ')
-key= ''.join([ escape16(x) for x in a ])
-a= [ '&#x{};'.format(x) for x in a ]
-a= ''.join(a)
-w[key]= a
+push( '091c 0948 0938 093e', 'as')
+push( '092e 0948 0902', 'I')
+push( '0907 0930 092b 093e 0928', 'Irfan')
+push( '0916 093e 0928', 'Khan')
+
+'''], ['0x92c', '0x940', '0x92e', '0x93e', '0x930', '0x93f', '0x92f', '0x94b', '0x902'], ['0x915', '0x947'], ['0x915', '0x93e', '0x930', '0x923'], ['0x916', '0x94b'], ['0x926', '0x93f', '0x92f', '0x93e', '0x964']]
+'''
+push( "0939 093e 0932", "-" )
+push( "0939 0940", "-" )
+push( "092c 0949 0932 0940 0935 0941 0921", "-" )
+push( "0928 0947", "-" )
+push( "0907 0930 092b 093e 0928", "-" )
+push( "0916 093e 0928", "-" )
+push( "0914 0930", "-" )
+push( "090b 0937 093f", "-" )
+push( "0915 092a 0942 0930", "-" )
+push( "091c 0948 0938 0947", "-" )
+push( "0926 093f 0917 094d 0917 091c", "-" )
+push( '0905 092d 093f 0928 0947 0924 093e 0913 0902', 'abhinetaon = the actors' )
+push( "0915 094b", "-" )
+push( '0932 093e 0907 0932 093e 091c', 'lailaaj = Incurable' )
+push( "092c 0940 092e 093e 0930 093f 092f 094b 0902", "-" )
+push( "0915 0947", "-" )
+push( "0915 093e 0930 0923", "-" )
+push( "0916 094b", "-" )
+push( "0926 093f 092f 093e 0964", "-" )
+push( "091c 0939 093e 0902", "-" )
+push( "0907 0930 092b 093e 0928", "-" )
+push( "0928 094d 092f 0942 0930 094b 090f 0902 0921 094b 0915 094d 0930 093e 0907 0928", "-" )
+push( "091f 094d 092f 0942 092e 0930", "-" )
+push( "091c 094b", "-" )
+push( "0936 0930 0940 0930", "-" )
+push( "092e 0947 0902", "-" )
+push( "0915 0939 0940 0902", "-" )
+push( "092d 0940", "-" )
+push( "0939 094b", "-" )
+push( "0938 0915 0924 093e", "-" )
+push( "0939 0948", "-" )
+push( "0938 0947", "-" )
+push( "092a 0940 0921 093f 093c 0924", "-" )
+push( "0925 0947", "-" )
+push( "0935 0939 0940 0902", "-" )
+push( "090b 0937 093f", "-" )
+push( "0915 092a 0942 0930", "-" )
+push( "0932 094d 092f 0942 0915 0947 092e 093f 092f 093e", "-" )
+push( "0915 0948 0902 0938 0930", "-" )
+push( "0938 0947", "-" )
+push( "0906 0916 093f 0930 0940", "-" )
+push( "0935 0915 093c 094d 0924", "-" )
+push( "0924 0915", "-" )
+push( "091c 0942 091d 0924 0947", "-" )
+push( "0930 0939 0947 0964", "-" )
+push( "0905 092c", "-" )
+push( "0939 093e 0932", "-" )
+push( "0939 0940", "-" )
+push( "090f 0915", "-" )
+push( "0914 0930", "-" )
+push( "092c 0949 0932 0940 0935 0941 0921", "-" )
+push( "0938 0947 0932 093f 092c 094d 0930 093f 091f 0940", "-" )
+push( "0928 0947", "-" )
+push( "0905 092a 0928 0940", "-" )
+push( "0916 093e 0938", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0938 0947", "-" )
+push( "092a 0930 094d 0926 093e", "-" )
+push( "0909 0920 093e 092f 093e", "-" )
+push( "0939 0948", "-" )
+push( "091c 093f 0938 0947", "-" )
+push( "0909 0928 094d 0939 094b 0902 0928 0947", "-" )
+push( "0905 092a 0928 0940", "-" )
+push( "0905 0926 092e 094d 092f", "-" )
+push( "0907 091a 094d 091b 093e", "-" )
+push( "0936 0915 094d 0924 093f", "-" )
+push( "0938 0947", "-" )
+push( "092c 0939 0941 0924", "-" )
+push( "092a 0939 0932 0947", "-" )
+push( "0939 0940", "-" )
+push( "0939 0930 093e", "-" )
+push( "0926 093f 092f 093e", "-" )
+push( "0925 093e 0964", "-" )
+push( "092f 0939", "-" )
+push( "0938 0947 0932 093f 092c 094d 0930 093f 091f 0940", "-" )
+push( "0914 0930", "-" )
+push( "0915 094b 0908", "-" )
+push( "0928 0939 0940 0902", "-" )
+push( "092a 0942 0930 094d 0935", "-" )
+push( "092c 094d 0930 0939 094d 092e 093e 0902 0921", "-" )
+push( "0938 0941 0902 0926 0930 0940", "-" )
+push( "0938 0941 0937 094d 092e 093f 0924 093e", "-" )
+push( "0938 0947 0928", "-" )
+push( "0939 0948 0902 0964", "-" )
+push( "0938 0941 0937 094d 092e 093f 0924 093e", "-" )
+push( "0938 0947 0928", "-" )
+push( "0928 0947", "-" )
+push( "0939 093e 0932", "-" )
+push( "0939 0940", "-" )
+push( "092e 0947 0902", "-" )
+push( "0916 0941 0932 093e 0938 093e", "-" )
+push( "0915 093f 092f 093e", "-" )
+push( "0915 093f", "-" )
+push( "0935 0939", "-" )
+push( "0905 0924 0940 0924", "-" )
+push( "092e 0947 0902", "-" )
+push( "090f 0915", "-" )
+push( "092a 0941 0930 093e 0928 0940", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0938 0947", "-" )
+push( "091c 0942 091d", "-" )
+push( "0930 0939 0940", "-" )
+push( "0925 0940 0902", "-" )
+push( "0914 0930", "-" )
+push( "092c 091a", "-" )
+push( "0917 0908 0902 0964", "-" )
+push( "090f 0921 093f 0938 0902 0938", "-" )
+push( "0921 093f 091c 0940 091c", "-" )
+push( "0928 093e 092e", "-" )
+push( "0915 0940", "-" )
+push( "0907 0938", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0938 0947", "-" )
+push( "0932 0921 0929 0947", "-" )
+push( "0915 0947", "-" )
+push( "092c 093e 0930 0947", "-" )
+push( "092e 0947 0902", "-" )
+push( "092d 093e 0935 0928 093e 0924 094d 092e 0915", "-" )
+push( "0915 0939 093e 0928 0940", "-" )
+push( "0938 093e 091d 093e", "-" )
+push( "0915 0930 0924 0947", "-" )
+push( "0939 0941 090f", "-" )
+push( "0909 0928 094d 0939 094b 0902 0928 0947", "-" )
+push( "0938 094b 0936 0932", "-" )
+push( "092e 0940 0921 093f 092f 093e", "-" )
+push( "092a 0930", "-" )
+push( "090f 0915", "-" )
+push( "092a 094b 0938 094d 091f", "-" )
+push( "092d 0940", "-" )
+push( "0932 093f 0916 0940", "-" )
+push( "0939 0948", "-" )
+push( "091c 093f 0938 092e 0947 0902", "-" )
+push( "0909 0928 094d 0939 094b 0902 0928 0947", "-" )
+push( "0915 0939 093e", "-" )
+push( "0915 093f", "-" )
+push( "0909 0928 094d 0939 094b 0902 0928 0947", "-" )
+push( "0915 0948 0938 0947", "-" )
+push( "091a 093e 0930", "-" )
+push( "0938 093e 0932", "-" )
+push( "0924 0915", "-" )
+push( "0907 0938", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0915 0947", "-" )
+push( "0916 093f 0932 093e 092b", "-" )
+push( "0932 0921 093c 093e 0908", "-" )
+push( "0932 0921 093c 0940 0964", "-" )
+
+
+push( "0911 091f 094b 0907 092e 094d 092f 0942 0928", "-" )
+push( "0938 0947", "-" )
+push( "091c 0941 0921 093c 093e", "-" )
+push( "0939 0948", "-" )
+push( "0930 094b 0917", "-" )
+push( "092a 0942 0930 094d 0935", "-" )
+push( "092e 093f 0938", "-" )
+push( "092f 0942 0928 093f 0935 0930 094d 0938", "-" )
+push( "0928 0947", "-" )
+push( "0916 0941 0932 093e 0938 093e", "-" )
+push( "0915 093f 092f 093e", "-" )
+push( "0915 093f", "-" )
+push( "091c 092c", "-" )
+push( "0909 0928 094d 0939 0947 0902", "-" )
+push( "0938 093f 0924 0902 092c 0930", "-" )
+push( "092e 0947 0902", "-" )
+push( "090f 0921 093f 0938 0928", "-" )
+push( "0928 093e 092e", "-" )
+push( "0915 0940", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0915 093e", "-" )
+push( "092a 0924 093e", "-" )
+push( "091a 0932 093e", "-" )
+push( "091c 094b", "-" )
+push( "0911 091f 094b 0907 092e 094d 092f 0942 0928", "-" )
+push( "0938 0947", "-" )
+push( "091c 0941 0921 093c 0940", "-" )
+push( "0939 0941 0908", "-" )
+push( "0939 0948", "-" )
+push( "0924 094b", "-" )
+push( "092e 0941 091d 0947", "-" )
+push( "0910 0938 093e", "-" )
+push( "0932 0917", "-" )
+push( "0930 0939 093e", "-" )
+push( "0925 093e", "-" )
+push( "092e 093e 0928 094b", "-" )
+push( "0905 092c", "-" )
+push( "0907 0938", "-" )
+push( "0932 0921 093c 093e 0908", "-" )
+push( "092e 0947 0902", "-" )
+push( "092e 0947 0930 0947", "-" )
+push( "0932 093f 090f", "-" )
+push( "0915 0941 091b", "-" )
+push( "0928 0939 0940 0902", "-" )
+push( "092c 091a 093e", "-" )
+push( "0939 0948 0964 0938 094b 0936 0932", "-" )
+push( "092e 0940 0921 093f 092f 093e", "-" )
+push( "092a 0930", "-" )
+push( "0909 0938", "-" )
+push( "0915 0920 093f 0928", "-" )
+push( "0926 094c 0930", "-" )
+push( "0915 0940", "-" )
+push( "092f 093e 0926", "-" )
+push( "0915 094b", "-" )
+push( "0924 093e 091c 093e", "-" )
+push( "0915 0930 0924 0947", "-" )
+push( "0939 0941 090f", "-" )
+push( "0909 0928 094d 0939 094b 0902 0928 0947", "-" )
+push( "0932 093f 0916 093e", "-" )
+push( "0915 093f", "-" )
+push( "092e 0947 0930 0940", "-" )
+push( "0906 0902 0916 094b 0902", "-" )
+push( "0915 0947", "-" )
+push( "0928 0940 091a 0947", "-" )
+push( "0915 0947", "-" )
+push( "0915 093e 0932 0947", "-" )
+push( "0918 0947 0930 094b 0902", "-" )
+push( "0938 0947", "-" )
+push( "092e 0947 0930 0947", "-" )
+push( "091a 093e 0930", "-" )
+push( "0938 093e 0932", "-" )
+push( "0915 0947", "-" )
+push( "0932 0902 092c 0947", "-" )
+push( "0938 0902 0918 0930 094d 0937", "-" )
+push( "0915 093e", "-" )
+push( "092a 0924 093e", "-" )
+push( "0928 0939 0940 0902", "-" )
+push( "091a 0932", "-" )
+push( "0938 0915 0924 093e 0964", "-" )
+push( "092c 0949 0932 0940 0935 0941 0921", "-" )
+push( "0915 0940", "-" )
+push( "0938 092c 0938 0947", "-" )
+push( "092b 093f 091f 094d 091f 0947 0938 094d 091f", "-" )
+push( "0914 0930", "-" )
+push( "092b 093f 091f 0928 0947 0938", "-" )
+push( "092b 094d 0930 0940 0915", "-" )
+push( "090f 0915 094d 091f 094d 0930 0948 0938", "-" )
+push( "092e 0947 0902", "-" )
+push( "0936 0941 092e 093e 0930", "-" )
+push( "096a 096a", "-" )
+push( "0935 0930 094d 0937 0940 092f", "-" )
+push( "0938 0941 0937 094d 092e 093f 0924 093e", "-" )
+push( "0928 0947", "-" )
+push( "0906 0917 0947", "-" )
+push( "0932 093f 0916 093e", "-" )
+push( "0915 093f", "-" )
+push( "0907 0932 093e 091c", "-" )
+push( "0915 0947", "-" )
+push( "0926 094c 0930 093e 0928", "-" )
+push( "0938 094d 091f 0947 0930 0949 092f 0921", "-" )
+push( "0915 0947", "-" )
+push( "0905 0938 0902 0916 094d 092f", "-" )
+push( "0926 0941 0937 094d 092a 094d 0930 092d 093e 0935 094b 0902", "-" )
+push( "0928 0947", "-" )
+push( "092e 0947 0930 0947", "-" )
+push( "0936 0930 0940 0930", "-" )
+push( "092a 0930", "-" )
+push( "092c 0939 0941 0924", "-" )
+push( "092c 0941 0930 093e", "-" )
+push( "0905 0938 0930", "-" )
+push( "0921 093e 0932 093e 0964", "-" )
+push( "092e 0948 0902", "-" )
+push( "0916 0941 0926", "-" )
+push( "0915 094b", "-" )
+push( "0930 094b 091c", "-" )
+push( "0938 092e 091d 093e 0924 0940", "-" )
+push( "0925 0940", "-" )
+push( "0932 0947 0915 093f 0928", "-" )
+push( "0939 0930", "-" )
+push( "0930 094b 091c", "-" )
+push( "092f 0939 0940", "-" )
+push( "0932 0917 0924 093e", "-" )
+push( "0925 093e", "-" )
+push( "0915 093f", "-" )
+push( "092e 0948 0902", "-" )
+push( "092f 0939", "-" )
+push( "0932 0921 093c 093e 0908", "-" )
+push( "0939 093e 0930", "-" )
+push( "091c 093e 090a 0902 0917 0940 0964", "-" )
+push( "0915 094d 092f 093e", "-" )
+push( "0939 0948", "-" )
+push( "090f 0921 093f 0938 0928", "-" )
+push( "0930 094b 0917", "-" )
+push( "0915 093e", "-" )
+push( "0915 093e 0930 0923 0936 0930 0940 0930", "-" )
+push( "0915 0940", "-" )
+push( "090f 0921 094d 0930 093f 0928 0932", "-" )
+push( "0917 094d 0930 0902 0925 093f 092f 094b 0902", "-" )
+push( "092e 0947 0902", "-" )
+push( "0939 094b 0928 0947", "-" )
+push( "0935 093e 0932 0947", "-" )
+push( "0907 0938", "-" )
+push( "0930 094b 0917", "-" )
+push( "092e 0947 0902", "-" )
+push( "0936 0930 0940 0930", "-" )
+push( "092a 0930 094d 092f 093e 092a 094d 0924", "-" )
+push( "092e 093e 0924 094d 0930 093e", "-" )
+push( "092e 0947 0902", "-" )
+push( "092f 093e", "-" )
+push( "092c 0939 0941 0924", "-" )
+push( "0915 092e", "-" )
+push( "092e 093e 0924 094d 0930 093e", "-" )
+push( "092e 0947 0902", "-" )
+push( "0915 094b 0930 094d 091f 093f 0938 094b 0932", "-" )
+push( "0914 0930", "-" )
+push( "090f 0932 094d 0921 094b 0938 094d 091f 0947 0930 094b 0928", "-" )
+push( "0928 093e 092e", "-" )
+push( "0915 0947", "-" )
+push( "0939 093e 0930 094d 092e 094b 0928", "-" )
+push( "0915 093e", "-" )
+push( "0909 0924 094d 092a 093e 0926 0928", "-" )
+push( "0915 0930 0924 093e", "-" )
+push( "0939 0948 094d 0930 0964", "-" )
+push( "0907 0938 0915 0947", "-" )
+push( "0905 092d 093e 0935", "-" )
+push( "092e 0947 0902", "-" )
+push( "0936 0930 0940 0930", "-" )
+push( "0915 0940", "-" )
+push( "092a 094d 0930 0924 093f 0930 0915 094d 0937 093e", "-" )
+push( "092a 094d 0930 0923 093e 0932 0940", "-" )
+push( "090f 0921 094d 0930 093f 0928 0932", "-" )
+push( "0917 094d 0930 0902 0925 093f 092f 094b 0902", "-" )
+push( "092a 0930", "-" )
+push( "0939 092e 0932 093e", "-" )
+push( "0915 0930 0924 0940", "-" )
+push( "0939 0948 0964", "-" )
+push( "090f 0921 093f 0938 0928", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0915 0947", "-" )
+push( "0915 093e 0930 0923", "-" )
+push( "090f 0921 094d 0930 093f 0928 0932", "-" )
+push( "0917 094d 0930 0902 0925 093f 092f 093e 0902", "-" )
+push( "0935 093f 092b 0932 0939 094b", "-" )
+push( "0938 0915 0924 0940", "-" )
+push( "0939 0948", "-" )
+push( "091c 093f 0938 0938 0947", "-" )
+push( "091c 093e 0928", "-" )
+push( "0915 094b", "-" )
+push( "092d 0940", "-" )
+push( "0916 0924 0930 093e", "-" )
+push( "0939 094b", "-" )
+push( "0938 0915 0924 093e", "-" )
+push( "0939 0948 0964", "-" )
+push( "0907 0938", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0938 0947", "-" )
+push( "092a 094d 0930 0916 094d 092f 093e 0924", "-" )
+push( "0932 0947 0916 0915", "-" )
+push( "091c 0947 0928", "-" )
+push( "0911 0938 094d 091f 0947 0928", "-" )
+push( "0915 093e", "-" )
+push( "092e 0947 0902", "-" )
+push( "0938 093e 0932", "-" )
+push( "0915 0940", "-" )
+push( "0909 092e 094d 0930", "-" )
+push( "092e 0947 0902", "-" )
+push( "0928 093f 0927 0928", "-" )
+push( "0939 094b", "-" )
+push( "0917 092f 093e", "-" )
+push( "0925 093e 0964", "-" )
+push( "0910 0938 0947", "-" )
+push( "0939 0940", "-" )
+push( "092a 0942 0930 094d 0935", "-" )
+push( "0926 093f 0935 0902 0917 0924", "-" )
+push( "0905 092e 0930 0940 0915 0940", "-" )
+push( "0930 093e 0937 094d 091f 094d 0930 092a 0924 093f", "-" )
+push( "091c 0949 0928", "-" )
+push( "090f 092b", "-" )
+push( "0915 0948 0928 0947 0921 0940", "-" )
+push( "0915 094b", "-" )
+push( "092e 0947 0902", "-" )
+push( "0938 093e 0932", "-" )
+push( "0915 0940", "-" )
+push( "0909 092e 094d 0930", "-" )
+push( "092e 0947 0902", "-" )
+push( "090f 0921 093f 0938 0928", "-" )
+push( "0915 0940", "-" )
+push( "092c 0940 092e 093e 0930 0940", "-" )
+push( "0915 093e", "-" )
+push( "092a 0924 093e", "-" )
+push( "091a 0932 093e", "-" )
+push( "0925 093e 0964", "-" )
+push( "0917 094c 0930 0924 0932 092c", "-" )
+push( "0939 0948", "-" )
+push( "0915 093f", "-" )
+push( "0938 093e 0932", "-" )
+push( "092a 0939 0932 0947", "-" )
+push( "092a 0942 0930 0940", "-" )
+push( "0926 0941 0928 093f 092f 093e", "-" )
+push( "0915 094b", "-" )
+push( "091a 094c 0902 0915 093e 0924 0947", "-" )
+push( "0939 0941 090f", "-" )
+push( "0938 0941 0937 094d 092e 093f 0924 093e", "-" )
+push( "0928 0947", "-" )
+push( "092e 093f 0938", "-" )
+push( "092f 0942 0928 093f 0935 0930 094d 0938", "-" )
+push( "0915 093e", "-" )
+push( "0916 093f 0924 093e 092c", "-" )
+push( "0905 092a 0928 0947", "-" )
+push( "0928 093e 092e", "-" )
+push( "0915 093f 092f 093e", "-" )
+push( "0914 0930", "-" )
+push( "092d 093e 0930 0924", "-" )
+push( "0915 094b", "-" )
+push( "0926 0941 0928 093f 092f 093e", "-" )
+push( "0915 0947", "-" )
+push( "0928 0915 094d 0936 0947", "-" )
+push( "092a 0930", "-" )
+push( "0938 0941 0902 0926 0930 093f 092f 094b 0902", "-" )
+push( "0915 0947", "-" )
+push( "0926 0947 0936", "-" )
+push( "0915 0947", "-" )
+push( "0930 0942 092a", "-" )
+push( "092e 0947 0902", "-" )
+push( "0930 0947 0916 093e 0902 0915 093f 0924", "-" )
+push( "0915 0930", "-" )
+push( "0926 093f 092f 093e 0964", "-" )
+push( "092f 0939", "-" )
+push( "092a 0939 0932 0940", "-" )
+push( "092c 093e 0930", "-" )
+push( "0925 093e", "-" )
+push( "091c 092c", "-" )
+push( "0915 093f 0938 0940", "kisee Any" )
+push( "092d 093e 0930 0924 0940 092f", "bharateeya Indian" )
+push( "0915 094b", "-" )
+push( "0907 0938", "-" )
+push( "0916 093f 0924 093e 092c", "-" )
+push( "0938 0947", "-" )
+push( "0928 0935 093e 091c 093e", "navaaja Awarded" )
+push( "0917 092f 093e", "-" )
+push( "0925 093e 0964", "-" )
+
+
+s= '%e0%a4%87%e0%a4%b0%e0%a4%ab%e0%a4%be%e0%a4%a8%e0%a4%96%e0%a4%be%e0%a4%a8%e0%a4%8b%e0%a4%b7%e0%a4%bf%e0%a4%95%e0%a4%aa%e0%a5%82%e0%a4%b0%e0%a4%95%e0%a5%87%e0%a4%ac%e0%a4%be%e0%a4%a6%e0%a4%85'
+
+print (s)
+
+def num(s):
+    return sum([int(x,16)*16**i for i,x in enumerate(reversed(s))])
+c= [s[3*n+1:3*n+3] for n in range(63)]
+print (c)
+n= [num(x) for x in c]
+print (n)
+n= [n[i:i+3] for i in range(0,len(n),3)]
+print (n)
+n= [bytes(x).decode() for x in n]
+print (n)
+n= [entity16ord(ord(x)) for x in n]
+print (n)
+
+s= open('b1', 'rb').read().decode().encode('latin1')
+print (s)
+s= s.split(b' ')
+c= [bytes.decode(x) for x in s]
+
+def hexz(x):
+    return hex(x).split('x')[-1].zfill(4)
+c= [ ' '.join([hexz(ord(y)) for y in x]) for x in c ]
+c= [ 'push( "{}", "-" )'.format(x) for x in c ]
+out= open('out', 'w')
+for x in c: out.write(x+'\n')
+out.close()
+#n= [num(x) for x in c]
+#n= [n[i:i+3] for i in range(0,len(n),3)]
+#n= [ [bytes(x).decode() for x in cx] for cx in c]
+#n= [entity16ord(ord(x)) for x in n]
+#print (n)
 
 dvngr['word'] = w
 
@@ -345,7 +851,6 @@ e['klc']= klc.html()
 e['ktc']= ktc.html()
 e['polish']= polish.html()
 e['devanagari']= dvngr
-
 
 
 s= json.dumps(e)
