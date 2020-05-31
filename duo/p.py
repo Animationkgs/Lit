@@ -853,6 +853,46 @@ e['polish']= polish.html()
 e['devanagari']= dvngr
 
 
+r7= range(0x0c80,0x0980)
+kannada= { 'repr': 'Kannada' }
+n1= 0
+
+
+'''
+Miscellaneous mathematical symbols
+2200 ∀ FOR ALL
+= universal quantifier
+2201 ∁ COMPLEMENT
+→ 0297 ʗ  latin letter stretched c
+2202 ∂ PARTIAL DIFFERENTIAL
+2203 ∃ THERE EXISTS
+= existential quantifier
+2204 ∄ THERE DOES NOT EXIST
+≡ 2203 ∃  0338 $̸
+2205 ∅ EMPTY SET
+= null set
+• used in linguistics to indicate a null morpheme
+or phonological “zero”
+→ 00D8 Ø  latin capital letter o with stroke
+→ 2300 ⌀  diameter sign
+⁓ 2205 FE00 ∅  zero with long diagonal stroke
+overlay form
+2206 ∆ INCREMENT
+= Laplace operator
+= forward difference
+= symmetric difference (in set theory)
+• other symbols may also be used for symmetric
+difference
+→ 0394 Δ  greek capital letter delta
+→ 25B3 △  white up-pointing triangle
+2207 ∇ NABLA
+= backward difference
+= gradient, del
+• used for Laplacian operator (written with
+superscript 2)
+→ 25BD ▽  white down-pointing triangle
+'''
+
 s= json.dumps(e)
 s= ['var duo= ', s, ';']
 s= ''.join(s)
