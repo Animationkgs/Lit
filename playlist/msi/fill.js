@@ -61,8 +61,6 @@ var fill2= function(d,n,v,depth=0) {
 
 
 
-
-
 var fill3= function(d,n,v,depth=0) {
 	var node= div().appendTo(d).setmarginleft(depth+'em').setborderleft('solid').setwidth('10000');
 	if (isobj(v)) {}
@@ -95,3 +93,6 @@ var fill3= function(d,n,v,depth=0) {
 	      b.setonclick(f);
 	return null;
 };
+
+
+

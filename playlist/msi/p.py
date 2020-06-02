@@ -56,6 +56,13 @@ w['1.04']['id']= 'A7bRJsnXutE'
 w['3.02']['id']= 'ru6yjKHHVJw'
 w['3.03']['id']= 'e4TgbgDrIT4'
 w['3.24']['id']= '06TZN_haFxk'
+w['3.09']['id']= 'iYHkKI703S8'
+w['3.07']['id']= 'KjCQ9mZm3XM'
+w['3.20']['id']= 'jq7YiybkWHI'
+w['3.05']['id']= 'fAWArXa_u0s'
+w['3.23']['id']= '2tPy7FPXsGY'
+w['2.04']['id']= 'OjnAcr-BECE'
+w['1.18']['id']= 'vKfKOutQnhY'
 w['title']= 'My Secret Identity 1988-1991'
 
 for k in row:
