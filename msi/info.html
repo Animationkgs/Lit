@@ -1,0 +1,78 @@
+
+
+
+<html>
+	<head></head>
+	<body>
+		<script src="js/element.js"> </script>
+		<script src="js/style.js" > </script>
+		<script src="js/fill.js" > </script>
+		<script src="js/gdrive.js"> </script>
+		<script src="js/howarth.js"> </script>
+
+
+
+		<script src="js/all/all.js"> </script>
+		<script src="js/mx/mx.js"> </script>
+		<script src="js/all/elements0.js"> </script>
+		<script src="js/beginner.js"> </script>
+		<script src="js/intermediate.js"> </script>
+		<script src="js/advanced.js"> </script>
+
+
+		<script>
+sing2.style(style).appendTo(sing.h);
+
+//alert(1);
+
+sing2.div('course').appendTo(sing.b);
+
+var m63821= '1';
+
+var prep= function (j,ret) {
+   var ck= ret.data.course.key;
+   var a= ret.data.course.lessons;
+   ret.title= ret.data.course.key + '= ' + ret.data.course.title; 
+   var i= -1, county= 0; while (++i < a.length) {
+	   var m= a[i];
+	   var y= 'm'+m.id;
+	   var t= 'lesson'+pad(i);
+	   if (window.hasOwnProperty(y)) { county++; ret[t]= { title: m.title + ', ' + y, m: window[y] }; }
+	   else ret[t]= m.title + ', ' + y;
+   }
+   ret.title += ', ' + county + '/' + a.length;
+   fill3( sing.b, '' + j + ', ' + ck, ret );
+};
+
+var prep2= function (j, x) {
+	if (window.hasOwnProperty(x)) prep(j,window[x]);
+	else fill2( sing.b, '' + j + ', ' + x, {});
+};
+
+//var courses= [ ud923(), ud980(), ud600(), cs271all, cs046, st101, cs313,cs253,cs215,cs222,ud120,ud256,ud501,ud168,ud853,ud197,ud388,ud919,design101 ];
+
+
+sing2.div('beginner').appendTo(sing.b);
+var cox= bgn;
+var j=-1; while (++j < cox.length ) prep2( j, cox[j] );
+
+sing2.div('advanced').appendTo(sing.b);
+cox= advx;
+j=-1; while ( ++j < cox.length ) prep2( j, cox[j] );
+
+sing2.div('intermediate').appendTo(sing.b);
+cox= itmda;
+j=-1; while ( ++j < cox.length ) prep2( j, cox[j] );
+
+
+
+
+
+fill3( sing.b, 'ud513', ud513 );
+fill3( sing.b, 'ud980', ud980 );
+fill2( sing.b, 'elements0', elements0 );
+		</script>
+
+	</body>
+</html>
+
